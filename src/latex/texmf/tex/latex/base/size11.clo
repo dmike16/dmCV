@@ -1,0 +1,27 @@
+\ProvidesFile{size11.clo}
+              [2014/10/19 v1.0h File binds to my cv Class (size
+                option)]
+\renewcommand{\normalsize}{\@setfontsize\normalize\@xipt{13.3}}
+\normalsize
+\newcommand\small{\@setfontsize\small\@xpt{12.1}}
+\newcommand\scriptsize{\@setfontsize\sciptsize\@viiipt{9.7}}
+\newcommand\large{\@setfontsize\large\@xiipt{14.5}}
+\newcommand\Large{\@setfontsize\Large\@xivpt{17.4}}
+\newcommand\LARGE{\@setfontsize\LARGE\@xviipt{20.9}}
+\newcommand\huge{\@setfontsize\huge\@xxpt{25.1}}
+\newcommand\Huge{\@setfontsize\HUGE\@xxvpt{30}}
+
+\setlength\smallskipamount{3\p@ \@plus 1\p@ \@minus 1\p@}
+\setlength\medskipamount{6\p@ \@plus 2\p@ \@minus 2\p@}
+\setlength\bigskipamount{12\p@ \@plus 4\p@ \@minus 4\p@}
+\setlength\topskip{11\p@}
+\setlength\parindent{17\p@}
+\setlength\@tempdima{\paperwidth}
+\addtolength\@tempdima{-2in}
+\setlength\textwidth{\@tempdima}
+\setlength\@tempdima{\paperheight}
+\addtolength\@tempdima{-3.5in}
+\divide\@tempdima\baselineskip
+\@tempcnta=\@tempdima
+\setlength\textheight{\@tempcnta\baselineskip}
+\addtolength\textheight{\topskip}

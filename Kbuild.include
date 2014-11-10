@@ -1,0 +1,45 @@
+###
+# Generic definitions
+
+comma	  := ,
+squote	  := '
+empty	  := 
+space	  := $(empty) $(empty)
+
+###
+escsq = $(subst $(squote),'\$(squote)',$1)
+
+###
+	kecho := :
+ quiet_kecho  := echo
+silent_kecho  := :
+kecho := $($(quiet)kecho)
+
+###
+echo-cmd = $(if $($(quiet)cmd_$(1)),\
+         echo ' $(call escsq,$($(quiet)cmd_$(1)))';)
+cmd = @$(echo-cmd) $(cmd_$(1)) 
+
+###
+# $(call file-existes, file-name)
+# Return non-null if a file exists
+file-exists = $(wildcard $1)
+
+###
+#Usage:
+#$(Q)$(MAKE) $(build)=dir
+build := -f $(if $(KBUILD_SRC),$(srctree)/)Makefile.build dir
+
+# $(call latex-compile,source_code)
+# Compile the main source code with latex
+define latex-compile
+ $(LATEX) $(TEXFLAGS) $1
+ $(LATEX) $(TEXFLAGS) $1
+endef
+
+# $(call latex-biber-compile,source_code,bcf_file)
+# Compile the main sorce and add the bibliography
+define latex-biber-compile
+ $(LATEX) $(TEXFLAGS) $1
+ $(BIB)   $2
+endef

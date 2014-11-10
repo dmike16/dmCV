@@ -1,0 +1,6 @@
+#Ingore files from LATEX output
+*.aux
+*.dvi
+*.pdf
+*.log
+*.ps

@@ -1,0 +1,18 @@
+##############################################################
+#
+# Define the files to clean. This file will be included in the principal
+# Makefile.
+#
+
+clean : rm-files := $(patsubst %,%/*~,$(source_latex_dir))  
+
+clean : rm-files += $(patsubst %,%/*~,$(source_biber_dir))
+
+clean : rm-files += $(patsubst %,%/*~,$(_subdir_list_texmf))
+
+clean : rm-files += $(patsubst %,%/*~,$(_subdir_list_main))
+	 
+
+clean : rm-files  += *~
+
+clean : rm-dirs	  := $(output_dir)

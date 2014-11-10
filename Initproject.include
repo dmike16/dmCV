@@ -1,0 +1,3 @@
+project_name      := curriculumVitae
+VERSION           := 1.0h
+subdir_list_texmf := tex/latex/base

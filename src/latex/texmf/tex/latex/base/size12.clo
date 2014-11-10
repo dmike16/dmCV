@@ -1,0 +1,29 @@
+\ProvidesFile{size12.clo}
+              [2014/10/19 v1.0h File binds to my cv Class (size
+                option)]
+\renewcommand{\normalsize}{\@setfontsize\normalize\@xiipt{14.5}}
+\normalsize
+\newcommand\small{\@setfontsize\small\@xipt{13.3}}
+\newcommand\scriptsize{\@setfontsize\sciptsize\@viiipt{9.7}}
+\newcommand\large{\@setfontsize\large\@xivpt{17.4}}
+\newcommand\Large{\@setfontsize\Large\@xviipt{20.9}}
+\newcommand\LARGE{\@setfontsize\LARGE\@xxpt{25.1}}
+\newcommand\huge{\@setfontsize\huge\@xxvpt{30.1}}
+\let\Huge\huge
+
+\setlength\smallskipamount{3\p@ \@plus 1\p@ \@minus 1\p@}
+\setlength\medskipamount{6\p@ \@plus 2\p@ \@minus 2\p@}
+\setlength\bigskipamount{12\p@ \@plus 4\p@ \@minus 4\p@}
+\setlength\topskip{12\p@}
+\setlength\parindent{1.5em}
+\setlength\@tempdima{\paperwidth}
+\addtolength\@tempdima{-2in}
+\setlength\textwidth{\@tempdima}
+\setlength\@tempdima{\paperheight}
+\addtolength\@tempdima{-2.2in}
+\divide\@tempdima\baselineskip
+\@tempcnta=\@tempdima
+\setlength\textheight{\@tempcnta\baselineskip}
+\addtolength\textheight{\topskip}
+
+\renewcommand\smallskip{\vskip\smallskipamount}
