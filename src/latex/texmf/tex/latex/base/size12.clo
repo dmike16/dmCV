@@ -15,6 +15,7 @@
 \setlength\medskipamount{6\p@ \@plus 2\p@ \@minus 2\p@}
 \setlength\bigskipamount{12\p@ \@plus 4\p@ \@minus 4\p@}
 \setlength\topskip{12\p@}
+\setlength\topsep{\topskip}
 \setlength\parindent{1.5em}
 \setlength\@tempdima{\paperwidth}
 \addtolength\@tempdima{-2in}
