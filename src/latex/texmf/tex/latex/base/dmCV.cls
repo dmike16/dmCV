@@ -13,9 +13,12 @@
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}%
   \renewcommand\@ptemplatetitle{93.5}}
 \DeclareOption{facsimile}{\@personaldatafalse}
+\DeclareOption{colorlinks=true}{\PassOptionsToPackage{\CurrentOption}{hyperref}}
+\DeclareOption{colorlinks=false}{\PassOptionsToPackage{\CurrentOption}{hyperref}}
+\DeclareOption{urlcolor=materialYellow}{\PassOptionsToPackage{\CurrentOption}{hyperref}}
 \DeclareOption*{%
   \ClassWarning{dmCV}{Unknow option '\CurrentOption'}}
-\ExecuteOptions{a4paper,11pt}
+\ExecuteOptions{a4paper,11pt,colorlinks=true,urlcolor=materialYellow}
 \ProcessOptions\relax
 
 
@@ -33,7 +36,7 @@
     \reset@font
     \color{materialBlack}
     \raisebox{-1.8ex}{{\scriptsize 
-        @cv}}\hspace{1\p@} \hfill \raisebox{-1.5ex}{{
+        @cv}}\hspace{1\p@} \hfil \raisebox{-1.5ex}{{
         \scriptsize \thepage}}}
   \null
   \smallskip%
@@ -51,7 +54,7 @@
 \fcolorbox{materialShadow}{materialBlue}{
 \makebox[\pic@width]{%
     \rule[\pic@height]{0\p@}{1.0\p@}
-    \raisebox{6em}{\centering
+    \raisebox{4em}{\centering
       \color{materialWhite}
       %\fcofamily
         \parbox[b]{\@ptemplatetitle\p@}{{\Large  \bfseries Curriculum
@@ -64,6 +67,9 @@
 \smallskip
 }
 
+\setlength\headheight{0\p@}
+\setlength\headsep{0\p@}
+\setlength\footskip{3ex}
 \setlength\leftmargini  {6.4em}
 \leftmargin \leftmargini
 \setlength\leftmarginii  {2.2em}
@@ -76,39 +82,44 @@
 \addtolength\labelwidth{-\labelsep}
 \setlength\itemsep{2.5ex}
 
-
+\def\@myempty{\empty}
 \newcommand\name[1]{\renewcommand\@name{#1}}
 \newcommand\surname[1]{\renewcommand\@surname{#1}}
 \newcommand\birth[1]{\renewcommand\@birth{#1}}
 \newcommand\email[1]{\renewcommand\@email{#1}}
 \newcommand\address[1]{\renewcommand\@address{#1}}
 \newcommand\photo[1]{\renewcommand\@photo{#1}}
-\def\@myempty{\empty}
 \def\@photo{\empty}
+\newcommand\nationality[1]{\renewcommand\@nationality{#1}}
 \if@personaldata
 \def\@name{\ClassError{dmCV}{No \noexpand\name given}{What's your name}}
 \def\@surname{\ClassError{dmCV}{No \noexpand\surname given}{What's your surname}}
 \def\@birth{\ClassError{dmCV}{No \noexpand\birth given}{When were you born}}
 \def\@email{\ClassError{dmCV}{No \noexpand\email given}{What's your email}}
-\def\@address{\ClassError{dmCV}{No \noexpand\address given}{What's your address}}
+\def\@address{\ClassError{dmCV}{No \noexpand\address given}{What's
+    your address}}
+\def\@nationality{\ClassError{dmCV}{No \noexpand\nationality given}{What's
+    your nationality}}
 \else
 \def\@name{\hfil }
 \def\@surname{\hfil}
 \def\@birth{\hfil}
 \def\@email{\hfil}
 \def\@address{\hfil}
+\def\@nationality{\hfil}
 \fi
 
 \newcommand\personaldata{%
 \begingroup
 \newbox\pd@title
-\setbox\pd@title\hbox to \textwidth{\hbox{{\bfseries Personal Data}}\hfil}
+\setbox\pd@title\hbox to \textwidth{\hbox{{\color{materialBlue}\bfseries Personal Data}}\hfil}
 \setbox5=\vtop{\halign{##\hfil&\quad##\hfil\cr
-  \hbox{{\bfseries Name}:}&\hbox{\@name}\cr
-  \hbox{{\bfseries Surname}:}&\hbox{\@surname}\cr
-  \hbox{{\bfseries Birth Date}:}&\hbox{\@birth}\cr
-  \hbox{{\bfseries E-mail}:}&\hbox{\@email}\cr
-  \hbox{{\bfseries Address}:}&\hbox{\@address}\cr
+  \hbox{{\color{materialBlack}\scriptsize\bfseries Name}:}&\hbox{\@name}\cr
+  \hbox{{\color{materialBlack}\scriptsize\bfseries Surname}:}&\hbox{\@surname}\cr
+  \hbox{{\color{materialBlack}\scriptsize\bfseries Birth}:}&\hbox{\@birth}\cr
+  \hbox{{\color{materialBlack}\scriptsize\bfseries Nationality}:}&\hbox{\@nationality}\cr
+  \hbox{{\color{materialBlack}\scriptsize\bfseries E-mail}:}&\hbox{\@email}\cr
+  \hbox{{\color{materialBlack}\scriptsize\bfseries Address}:}&\hbox{\@address}\cr
 }}
 \def\@tempdim{\wd5}
 \newlength\pos@photo
@@ -134,17 +145,18 @@
 }
 
 \newcommand\event[1]{%
-  \item[{\bfseries\small #1}]}
+  \item[{\color{materialBlack}\scriptsize\bfseries #1}]}
 \newcounter{target}
 \newenvironment{eventlist}[1]{%
   \par\null
   \begingroup
-  \setbox0=\hbox to \textwidth{\hbox{{\bfseries #1}}\hfil}
+  \setbox0=\hbox to \textwidth{\hbox{{\color{materialBlue}\bfseries #1}}\hfil}
   \vbox{\box0\null\smallskip
     {\color{materialShadow}\hrule height1.5\p@}}
   \endgroup
   \begin{list}
-    {{\small [\arabic{target}]}}{\usecounter{target}%
+    {{\color{materialBlack}\scriptsize\bfseries [\arabic{target}]}}{\usecounter{target}%
       \setlength{\rightmargin}{\leftmargin}}}{\end{list}}
+\RequirePackage[pdfpagelabels=false]{hyperref}
 \pagestyle{plain}
 \pagenumbering{arabic}
