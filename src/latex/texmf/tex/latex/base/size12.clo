@@ -14,17 +14,28 @@
 \setlength\smallskipamount{3\p@ \@plus 1\p@ \@minus 1\p@}
 \setlength\medskipamount{6\p@ \@plus 2\p@ \@minus 2\p@}
 \setlength\bigskipamount{12\p@ \@plus 4\p@ \@minus 4\p@}
-\setlength\topskip{12\p@}
-\setlength\topsep{\topskip}
+\setlength\headheight{12\p@}
+\setlength\headsep   {25\p@}
+\setlength\topskip   {12\p@}
+\setlength\footskip {30\p@}
 \setlength\parindent{1.5em}
 \setlength\@tempdima{\paperwidth}
 \addtolength\@tempdima{-2in}
-\setlength\textwidth{\@tempdima}
+\setlength\@tempdimb{390\p@}
+\ifdim\@tempdima>\@tempdimb\relax
+  \setlength\textwidth{\@tempdimb}
+\else
+  \setlength\textwidth{\@tempdima}
+\fi
 \setlength\@tempdima{\paperheight}
 \addtolength\@tempdima{-2.2in}
 \divide\@tempdima\baselineskip
 \@tempcnta=\@tempdima
 \setlength\textheight{\@tempcnta\baselineskip}
 \addtolength\textheight{\topskip}
+\setlength\partopsep{3\p@ \@plus 2\p@ \@minus 2\p@}
+\parsep 5\p@  \@plus2.5\p@ \@minus\p@
+\topsep 10\p@ \@plus4\p@   \@minus6\p@
+\itemsep5\p@  \@plus2.5\p@ \@minus\p@
 
 \renewcommand\smallskip{\vskip\smallskipamount}

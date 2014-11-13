@@ -67,9 +67,6 @@
 \smallskip
 }
 
-\setlength\headheight{0\p@}
-\setlength\headsep{0\p@}
-\setlength\footskip{3ex}
 \setlength\leftmargini  {6.4em}
 \leftmargin \leftmargini
 \setlength\leftmarginii  {2.2em}
@@ -80,7 +77,6 @@
 \setlength  \labelsep  {2.5em}
 \setlength  \labelwidth{\leftmargini}
 \addtolength\labelwidth{-\labelsep}
-\setlength\itemsep{2.5ex}
 
 \def\@myempty{\empty}
 \newcommand\name[1]{\renewcommand\@name{#1}}
@@ -109,6 +105,8 @@
 \def\@nationality{\hfil}
 \fi
 
+\def\where\hbox
+\let\when\where
 \newcommand\personaldata{%
 \begingroup
 \newbox\pd@title
@@ -116,7 +114,7 @@
 \setbox5=\vtop{\halign{##\hfil&\quad##\hfil\cr
   \hbox{{\color{materialBlack}\scriptsize\bfseries Name}:}&\hbox{\@name}\cr
   \hbox{{\color{materialBlack}\scriptsize\bfseries Surname}:}&\hbox{\@surname}\cr
-  \hbox{{\color{materialBlack}\scriptsize\bfseries Birth}:}&\hbox{\@birth}\cr
+  \hbox{{\color{materialBlack}\scriptsize\bfseries Birth}:}&\vtop{\@birth\null}\cr
   \hbox{{\color{materialBlack}\scriptsize\bfseries Nationality}:}&\hbox{\@nationality}\cr
   \hbox{{\color{materialBlack}\scriptsize\bfseries E-mail}:}&\hbox{\@email}\cr
   \hbox{{\color{materialBlack}\scriptsize\bfseries Address}:}&\hbox{\@address}\cr
@@ -130,16 +128,16 @@
 \setbox\photo@box\hbox{\framebox[101pt]{\rule[10pt]{0pt}{131pt}%
     \raisebox{2cm}{\hbox{No Photo}}}}
 \else
-\setbox\photo@box\hbox{\framebox{\includegraphics[width=101pt,height=130pt]{\@photo}}}
+\setbox\photo@box\hbox{\framebox{\includegraphics[width=101\p@,height=130\p@]{\@photo}}}
 \fi
 \def\@tempdim{\wd\photo@box}
 \addtolength\pos@photo{-\@tempdim}
 \setbox6=\vbox{\moveright\pos@photo\box\photo@box}
 \null\smallskip
-\vbox{\box\pd@title\null\smallskip
-    {\color{materialShadow}\hrule height1.5\p@}}
+\vbox{\box\pd@title\null\smallskip}
 \null
 \hbox{\raisebox{4cm}{\box5}\hfil\box6}\null\vskip 1ex
+{\color{materialShadow}\hrule height1.5\p@}
 \par\nobreak\null\smallskip
 \endgroup
 }
@@ -151,12 +149,12 @@
   \par\null
   \begingroup
   \setbox0=\hbox to \textwidth{\hbox{{\color{materialBlue}\bfseries #1}}\hfil}
-  \vbox{\box0\null\smallskip
-    {\color{materialShadow}\hrule height1.5\p@}}
+  \vbox{\box0\null}
   \endgroup
   \begin{list}
     {{\color{materialBlack}\scriptsize\bfseries [\arabic{target}]}}{\usecounter{target}%
-      \setlength{\rightmargin}{\leftmargin}}}{\end{list}}
+      \setlength{\rightmargin}{\leftmargin}}}{\end{list}%
+{\color{materialShadow}\hrule height1.5\p@}\null\smallskip}
 \RequirePackage[pdfpagelabels=false]{hyperref}
 \pagestyle{plain}
 \pagenumbering{arabic}
