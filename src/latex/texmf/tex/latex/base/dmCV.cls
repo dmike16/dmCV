@@ -1,26 +1,34 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{dmCV}[2014/10/30 v1.0h CurriculumVitae Template]
-\RequirePackage{xcolor,color,graphicx}%,comfortaa,graphicx}
+\RequirePackage{xcolor,color,graphicx,kvoptions}%,comfortaa
 \newcommand\@ptsize{}
 \newcommand\@ptemplatetitle{}
 \newif\if@personaldata
 \@personaldatatrue
-\DeclareOption{a4paper}{%
+
+\SetupKeyvalOptions{
+  family=dmCV,
+  prefix=dmCV@
+}
+\DeclareVoidOption{a4paper}{%
   \setlength\paperheight {297mm}%
   \setlength\paperwidth {210mm}}
-\DeclareOption{11pt}{\renewcommand\@ptsize{1}%
+\DeclareVoidOption{11pt}{\renewcommand\@ptsize{1}%
   \renewcommand\@ptemplatetitle{79.5}}
-\DeclareOption{12pt}{\renewcommand\@ptsize{2}%
+\DeclareVoidOption{12pt}{\renewcommand\@ptsize{2}%
   \renewcommand\@ptemplatetitle{93.5}}
-\DeclareOption{facsimile}{\@personaldatafalse}
-\DeclareOption{colorlinks=true}{\PassOptionsToPackage{\CurrentOption}{hyperref}}
-\DeclareOption{colorlinks=false}{\PassOptionsToPackage{\CurrentOption}{hyperref}}
-\DeclareOption{urlcolor=materialYellow}{\PassOptionsToPackage{\CurrentOption}{hyperref}}
-\DeclareOption*{%
+\DeclareVoidOption{facsimile}{\@personaldatafalse}
+\DeclareBoolOption{noweblinkbox}
+\DeclareStringOption[materialGreen]{weblinkcolor}
+\DeclareDefaultOption{%
   \ClassWarning{dmCV}{Unknow option '\CurrentOption'}}
-\ExecuteOptions{a4paper,11pt,colorlinks=true,urlcolor=materialYellow}
-\ProcessOptions\relax
-
+\ExecuteOptions{a4paper,11pt}
+\ProcessKeyvalOptions{dmCV}
+\ifdmCV@noweblinkbox
+\PassOptionsToPackage{colorlinks=true}{hyperref}
+\fi
+\PassOptionsToPackage{urlcolor=\dmCV@weblinkcolor}{hyperref}
+\relax
 
 \input{size1\@ptsize.clo}
 \input{materialColor.def}
@@ -29,7 +37,6 @@
       \@makecvheadings
 
 }
-
 \def\@makecvheadings{%
   \let\@oddfoot\@empty
   \def\@oddfoot{%
@@ -105,19 +112,21 @@
 \def\@nationality{\hfil}
 \fi
 
-\def\where\hbox
+\def\when{\my@empty}
+\def\where{\hbox}
 \let\when\where
+
 \newcommand\personaldata{%
 \begingroup
 \newbox\pd@title
 \setbox\pd@title\hbox to \textwidth{\hbox{{\color{materialBlue}\bfseries Personal Data}}\hfil}
 \setbox5=\vtop{\halign{##\hfil&\quad##\hfil\cr
-  \hbox{{\color{materialBlack}\scriptsize\bfseries Name}:}&\hbox{\@name}\cr
-  \hbox{{\color{materialBlack}\scriptsize\bfseries Surname}:}&\hbox{\@surname}\cr
-  \hbox{{\color{materialBlack}\scriptsize\bfseries Birth}:}&\vtop{\@birth\null}\cr
-  \hbox{{\color{materialBlack}\scriptsize\bfseries Nationality}:}&\hbox{\@nationality}\cr
-  \hbox{{\color{materialBlack}\scriptsize\bfseries E-mail}:}&\hbox{\@email}\cr
-  \hbox{{\color{materialBlack}\scriptsize\bfseries Address}:}&\hbox{\@address}\cr
+  \hbox{{\color{materialViolet}\scriptsize\bfseries Name}:}&\hbox{\@name}\cr
+  \hbox{{\color{materialViolet}\scriptsize\bfseries Surname}:}&\hbox{\@surname}\cr
+  \hbox{{\color{materialViolet}\scriptsize\bfseries Birth}:}&\vtop{\@birth\null}\cr
+  \hbox{{\color{materialViolet}\scriptsize\bfseries Nationality}:}&\hbox{\@nationality}\cr
+  \hbox{{\color{materialViolet}\scriptsize\bfseries E-mail}:}&\hbox{\@email}\cr
+  \hbox{{\color{materialViolet}\scriptsize\bfseries Address}:}&\hbox{\@address}\cr
 }}
 \def\@tempdim{\wd5}
 \newlength\pos@photo
@@ -143,7 +152,7 @@
 }
 
 \newcommand\event[1]{%
-  \item[{\color{materialBlack}\scriptsize\bfseries #1}]}
+  \item[{\color{materialViolet}\scriptsize\bfseries #1}]}
 \newcounter{target}
 \newenvironment{eventlist}[1]{%
   \par\null
@@ -152,9 +161,10 @@
   \vbox{\box0\null}
   \endgroup
   \begin{list}
-    {{\color{materialBlack}\scriptsize\bfseries [\arabic{target}]}}{\usecounter{target}%
+    {{\color{materialViolet}\scriptsize\bfseries [\arabic{target}]}}{\usecounter{target}%
       \setlength{\rightmargin}{\leftmargin}}}{\end{list}%
 {\color{materialShadow}\hrule height1.5\p@}\null\smallskip}
 \RequirePackage[pdfpagelabels=false]{hyperref}
 \pagestyle{plain}
 \pagenumbering{arabic}
+

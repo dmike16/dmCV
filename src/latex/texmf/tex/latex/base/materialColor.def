@@ -3,3 +3,5 @@
 \definecolor{materialBlack}{HTML}{63636D}
 \definecolor{materialYellow}{HTML}{F5FF28}
 \definecolor{materialShadow}{HTML}{EFEFFF}
+\definecolor{materialViolet}{HTML}{6D286D}
+\definecolor{materialGreen}{HTML}{186D33}
