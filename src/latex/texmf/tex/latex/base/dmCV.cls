@@ -115,18 +115,20 @@
 \def\when{\my@empty}
 \def\where{\hbox}
 \let\when\where
+\newcommand\colordata[1]{\renewcommand\@colordata{#1}}
+\def\@colordata{materialViolet}
 
 \newcommand\personaldata{%
 \begingroup
 \newbox\pd@title
 \setbox\pd@title\hbox to \textwidth{\hbox{{\color{materialBlue}\bfseries Personal Data}}\hfil}
 \setbox5=\vtop{\halign{##\hfil&\quad##\hfil\cr
-  \hbox{{\color{materialViolet}\scriptsize\bfseries Name}:}&\hbox{\@name}\cr
-  \hbox{{\color{materialViolet}\scriptsize\bfseries Surname}:}&\hbox{\@surname}\cr
-  \hbox{{\color{materialViolet}\scriptsize\bfseries Birth}:}&\vtop{\@birth\null}\cr
-  \hbox{{\color{materialViolet}\scriptsize\bfseries Nationality}:}&\hbox{\@nationality}\cr
-  \hbox{{\color{materialViolet}\scriptsize\bfseries E-mail}:}&\hbox{\@email}\cr
-  \hbox{{\color{materialViolet}\scriptsize\bfseries Address}:}&\hbox{\@address}\cr
+  \hbox{{\color{\@colordata}\scriptsize\bfseries Name}:}&\hbox{\@name}\cr
+  \hbox{{\color{\@colordata}\scriptsize\bfseries Surname}:}&\hbox{\@surname}\cr
+  \hbox{{\color{\@colordata}\scriptsize\bfseries Birth}:}&\vtop{\@birth\null}\cr
+  \hbox{{\color{\@colordata}\scriptsize\bfseries Nationality}:}&\hbox{\@nationality}\cr
+  \hbox{{\color{\@colordata}\scriptsize\bfseries E-mail}:}&\hbox{\@email}\cr
+  \hbox{{\color{\@colordata}\scriptsize\bfseries Address}:}&\hbox{\@address}\cr
 }}
 \def\@tempdim{\wd5}
 \newlength\pos@photo
@@ -151,8 +153,21 @@
 \endgroup
 }
 
+\newcommand\colorevent[1]{\renewcommand\@colorevent{#1}}
+\let\@colorevent\@colordata
+
+\newlength\@itembody
+\setlength\@itembody{\textwidth}
+\addtolength\@itembody{-\leftmargin}
+\addtolength\@itembody{-\leftmargin}
+
+\newcommand\eventfull[2]{%
+  \item[{\color{\@colorevent}\scriptsize\bfseries
+      #1}]\hskip0.1\p@\hbox to
+    \@itembody{\vbox{\hsize\@itembody{\bfseries #2}}}}
+
 \newcommand\event[1]{%
-  \item[{\color{materialViolet}\scriptsize\bfseries #1}]}
+  \item[{\color{\@colorevent}\scriptsize\bfseries #1}]}
 \newcounter{target}
 \newenvironment{eventlist}[1]{%
   \par\null
@@ -161,7 +176,7 @@
   \vbox{\box0\null}
   \endgroup
   \begin{list}
-    {{\color{materialViolet}\scriptsize\bfseries [\arabic{target}]}}{\usecounter{target}%
+    {{\color{\@colorevent}\scriptsize\bfseries [\arabic{target}]}}{\usecounter{target}%
       \setlength{\rightmargin}{\leftmargin}}}{\end{list}%
 {\color{materialShadow}\hrule height1.5\p@}\null\smallskip}
 \RequirePackage[pdfpagelabels=false]{hyperref}

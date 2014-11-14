@@ -21,7 +21,7 @@
 \setlength\parindent{1.5em}
 \setlength\@tempdima{\paperwidth}
 \addtolength\@tempdima{-2in}
-\setlength\@tempdimb{390\p@}
+\setlength\@tempdimb{418\p@}
 \ifdim\@tempdima>\@tempdimb\relax
   \setlength\textwidth{\@tempdimb}
 \else
