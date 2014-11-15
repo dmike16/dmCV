@@ -5,3 +5,4 @@
 \definecolor{materialShadow}{HTML}{EFEFFF}
 \definecolor{materialViolet}{HTML}{6D286D}
 \definecolor{materialGreen}{HTML}{186D33}
+\definecolor{materialGray}{HTML}{514a51}

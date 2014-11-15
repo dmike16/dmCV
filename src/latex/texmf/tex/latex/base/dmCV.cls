@@ -1,8 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{dmCV}[2014/10/30 v1.0h CurriculumVitae Template]
-\RequirePackage{xcolor,color,graphicx,kvoptions}%,comfortaa
+\RequirePackage{xcolor,color,graphicx,kvoptions}
 \newcommand\@ptsize{}
 \newcommand\@ptemplatetitle{}
+\newcommand\@eventfontitle{}
 \newif\if@personaldata
 \@personaldatatrue
 
@@ -18,6 +19,8 @@
 \DeclareVoidOption{12pt}{\renewcommand\@ptsize{2}%
   \renewcommand\@ptemplatetitle{93.5}}
 \DeclareVoidOption{facsimile}{\@personaldatafalse}
+\DeclareVoidOption{eventconfortaa}{\RequirePackage{comfortaa}%
+  \renewcommand\@eventfontitle{\fcofamily}}
 \DeclareBoolOption{noweblinkbox}
 \DeclareStringOption[materialGreen]{weblinkcolor}
 \DeclareDefaultOption{%
@@ -121,7 +124,7 @@
 \newcommand\personaldata{%
 \begingroup
 \newbox\pd@title
-\setbox\pd@title\hbox to \textwidth{\hbox{{\color{materialBlue}\bfseries Personal Data}}\hfil}
+\setbox\pd@title\hbox to \textwidth{\hbox{{\@eventfontitle\color{materialBlue}\bfseries Personal Data}}\hfil}
 \setbox5=\vtop{\halign{##\hfil&\quad##\hfil\cr
   \hbox{{\color{\@colordata}\scriptsize\bfseries Name}:}&\hbox{\@name}\cr
   \hbox{{\color{\@colordata}\scriptsize\bfseries Surname}:}&\hbox{\@surname}\cr
@@ -155,16 +158,26 @@
 
 \newcommand\colorevent[1]{\renewcommand\@colorevent{#1}}
 \let\@colorevent\@colordata
+\newcommand\colorlevel[1]{\renewcommand\@colorlevel{#1}}
+\def\@colorlevel{materialGray}
 
 \newlength\@itembody
 \setlength\@itembody{\textwidth}
 \addtolength\@itembody{-\leftmargin}
 \addtolength\@itembody{-\leftmargin}
 
-\newcommand\eventfull[2]{%
-  \item[{\color{\@colorevent}\scriptsize\bfseries
-      #1}]\hskip0.1\p@\hbox to
-    \@itembody{\vbox{\hsize\@itembody{\bfseries #2}}}}
+\newcommand\eventitle[2]{%
+  \setbox0=\vbox{\hsize\@itembody{\bfseries #2}}
+  \setbox1=\vbox{%
+    \hsize\@itembody
+    \copy0\global\setbox2=\lastbox}
+ \item[{\color{\@colorevent}\scriptsize\bfseries
+      #1}]\noindent\box2\newline}
+
+\newcommand\eventlevel[2][\@myempty]{%
+  \setbox0=\hbox{{\color{\@colorlevel}\underline{\scriptsize\scshape #1}}~}
+  \item[{\color{\@colorevent}\scriptsize\bfseries #2}]%
+   \unhbox0}
 
 \newcommand\event[1]{%
   \item[{\color{\@colorevent}\scriptsize\bfseries #1}]}
@@ -172,7 +185,7 @@
 \newenvironment{eventlist}[1]{%
   \par\null
   \begingroup
-  \setbox0=\hbox to \textwidth{\hbox{{\color{materialBlue}\bfseries #1}}\hfil}
+  \setbox0=\hbox to \textwidth{\hbox{{\@eventfontitle\color{materialBlue}\bfseries #1}}\hfil}
   \vbox{\box0\null}
   \endgroup
   \begin{list}
