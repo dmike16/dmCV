@@ -432,7 +432,7 @@
 \newcommand\surname[1]{\renewcommand\@surname{#1}}
 \newcommand\birth[1]{\renewcommand\@birth{#1}}
 \newcommand\email[1]{\renewcommand\@email{#1}}
-\newcommand\address[1]{\renewcommand\@address{#1}}
+\newcommand\gender[1]{\renewcommand\@gender{#1}}
 \newcommand\photo[1]{\renewcommand\@photo{#1}}
 \def\@photo{\empty}
 \newcommand\nationality[1]{\renewcommand\@nationality{#1}}
@@ -441,8 +441,8 @@
 \def\@surname{\ClassError{dmCV}{No \noexpand\surname given}{What's your surname}}
 \def\@birth{\ClassError{dmCV}{No \noexpand\birth given}{When were you born}}
 \def\@email{\ClassError{dmCV}{No \noexpand\email given}{What's your email}}
-\def\@address{\ClassError{dmCV}{No \noexpand\address given}{What's
-    your address}}
+\def\@gender{\ClassError{dmCV}{No \noexpand\gender given}{What's
+    your gender}}
 \def\@nationality{\ClassError{dmCV}{No \noexpand\nationality given}{What's
     your nationality}}
 \else
@@ -450,7 +450,7 @@
 \def\@surname{\hfil}
 \def\@birth{\hfil}
 \def\@email{\hfil}
-\def\@address{\hfil}
+\def\@gender{\hfil}
 \def\@nationality{\hfil}
 \fi
 
@@ -470,7 +470,7 @@
   \hbox{{\color{\@colordata}\scriptsize\bfseries Birth}:}&\vtop{\@birth\null}\cr
   \hbox{{\color{\@colordata}\scriptsize\bfseries Nationality}:}&\hbox{\@nationality}\cr
   \hbox{{\color{\@colordata}\scriptsize\bfseries E-mail}:}&\hbox{\@email}\cr
-  \hbox{{\color{\@colordata}\scriptsize\bfseries Address}:}&\hbox{\@address}\cr
+  \hbox{{\color{\@colordata}\scriptsize\bfseries Gender}:}&\hbox{\@gender}\cr
 }}
 \def\@tempdim{\wd5}
 \newlength\pos@photo

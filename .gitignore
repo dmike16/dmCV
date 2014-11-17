@@ -7,3 +7,7 @@
 
 #Build dir
 _build/
+
+#Personal Info
+src/latex/main/*.jpg
+src/latex/main/*.private.tex
