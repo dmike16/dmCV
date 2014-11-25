@@ -337,11 +337,11 @@
 %consider it more useful to permit linking proprietary applications with the
 %library.  If this is what you want to do, use the GNU Lesser General
 %Public License instead of this License.
-\definecolor{materialWhite}{HTML}{E5E5CC}
-\definecolor{materialBlue}{HTML}{2196FF}
+\definecolor{materialWhite}{HTML}{EFEFFF}
+\definecolor{materialBlue}{HTML}{2196EF}
 \definecolor{materialBlack}{HTML}{63636D}
 \definecolor{materialYellow}{HTML}{F5FF28}
 \definecolor{materialShadow}{HTML}{EFEFFF}
-\definecolor{materialViolet}{HTML}{6D286D}
-\definecolor{materialGreen}{HTML}{186D33}
+\definecolor{materialBluee}{HTML}{20446D}
+\definecolor{materialGreen}{HTML}{145D43}
 \definecolor{materialGray}{HTML}{514a51}

@@ -361,7 +361,7 @@
 \DeclareVoidOption{eventconfortaa}{\RequirePackage{comfortaa}%
   \renewcommand\@eventfontitle{\fcofamily}}
 \DeclareBoolOption{noweblinkbox}
-\DeclareStringOption[materialGreen]{weblinkcolor}
+\DeclareStringOption[materialBluee]{weblinkcolor}
 \DeclareDefaultOption{%
   \ClassWarning{dmCV}{Unknow option '\CurrentOption'}}
 \ExecuteOptions{a4paper,11pt}
@@ -400,12 +400,11 @@
 \pic@height=\textheight
 \divide\pic@height\height@portion
 \fboxrule1.5pt
-\fcolorbox{materialShadow}{materialBlue}{
+\fcolorbox{materialShadow}{materialWhite}{
 \makebox[\pic@width]{%
     \rule[\pic@height]{0\p@}{1.0\p@}
     \raisebox{4em}{\centering
-      \color{materialWhite}
-      %\fcofamily
+      \color{materialBlue}
         \parbox[b]{\@ptemplatetitle\p@}{{\Large  \bfseries Curriculum
             Vitae }}
         {\large et}
@@ -458,7 +457,7 @@
 \def\where{\hbox}
 \let\when\where
 \newcommand\colordata[1]{\renewcommand\@colordata{#1}}
-\def\@colordata{materialViolet}
+\def\@colordata{materialBluee}
 
 \newcommand\personaldata{%
 \begingroup
@@ -467,9 +466,9 @@
 \setbox5=\vtop{\halign{##\hfil&\quad##\hfil\cr
   \hbox{{\color{\@colordata}\scriptsize\bfseries Name}:}&\hbox{\@name}\cr
   \hbox{{\color{\@colordata}\scriptsize\bfseries Surname}:}&\hbox{\@surname}\cr
-  \hbox{{\color{\@colordata}\scriptsize\bfseries Birth}:}&\vtop{\@birth\null}\cr
+  \hbox{{\color{\@colordata}\scriptsize\bfseries Date of Birth}:}&\vtop{\@birth\null}\cr
   \hbox{{\color{\@colordata}\scriptsize\bfseries Nationality}:}&\hbox{\@nationality}\cr
-  \hbox{{\color{\@colordata}\scriptsize\bfseries E-mail}:}&\hbox{\@email}\cr
+  \hbox{{\color{\@colordata}\scriptsize\bfseries E-mail}:}&\hbox{\href{mailto:\@email}{\nolinkurl{\@email}}}\cr
   \hbox{{\color{\@colordata}\scriptsize\bfseries Gender}:}&\hbox{\@gender}\cr
 }}
 \def\@tempdim{\wd5}
@@ -491,7 +490,7 @@
 \null
 \hbox{\raisebox{4cm}{\box5}\hfil\box6}\null\vskip 1ex
 {\color{materialShadow}\hrule height1.5\p@}
-\par\nobreak\null\smallskip
+\nobreak\null\smallskip
 \endgroup
 }
 
@@ -499,6 +498,8 @@
 \let\@colorevent\@colordata
 \newcommand\colorlevel[1]{\renewcommand\@colorlevel{#1}}
 \def\@colorlevel{materialGray}
+\newcommand\coloreventitledate[1]{\renewcommand\@coloreventitledate{#1}}
+\def\@coloreventitledate{materialBluee}
 
 \newlength\@itembody
 \setlength\@itembody{\textwidth}
@@ -531,6 +532,37 @@
     {{\color{\@colorevent}\scriptsize\bfseries [\arabic{target}]}}{\usecounter{target}%
       \setlength{\rightmargin}{\leftmargin}}}{\end{list}%
 {\color{materialShadow}\hrule height1.5\p@}\null\smallskip}
+
+\newlength\raise@pt
+\newcommand\eventbody[2][\@empty]{%
+  \begingroup
+  \setbox1=\vbox{%
+    \hsize0.4\textwidth
+     \hfill {\color{\@coloreventitledate}\bfseries#1}}
+   \setbox2\vbox\bgroup\hsize0.6\textwidth%
+   \noindent{\color{\@coloreventitledate}\bfseries #2}\\ } 
+
+\newlength\eventskip
+\setlength\eventskip{\itemsep}
+\addtolength\eventskip{\medskipamount}
+
+\newcommand\eventdone{%
+  \egroup
+  \setlength\raise@pt{\ht2}\addtolength\raise@pt{-0.7em}
+  \setbox3\hbox{\box2\raisebox{\raise@pt}{\box1}}
+  \box3\endgroup
+  \vskip\eventskip}
+
+\newenvironment{eventfree}[1]{%
+  \null
+  \begingroup
+  \setbox0=\hbox to \textwidth{\hbox{{\@eventfontitle\color{materialBlue}\bfseries #1}}\hfil}
+  \vbox{\box0\null}
+  \endgroup
+  \newbox\event@free
+  \setbox\event@free\vbox\bgroup
+ }{\egroup\unvbox\event@free\unskip\null{\color{materialShadow}\hrule height1.5\p@}\null\smallskip}
+
 \RequirePackage[pdfpagelabels=false]{hyperref}
 \pagestyle{plain}
 \pagenumbering{arabic}

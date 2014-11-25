@@ -10,4 +10,5 @@ _build/
 
 #Personal Info
 src/latex/main/*.jpg
-src/latex/main/*.private.tex
+src/latex/main/*.tex.private
+src/latex/main/*.tex.backup

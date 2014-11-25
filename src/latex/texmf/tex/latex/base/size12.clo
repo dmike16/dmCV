@@ -378,3 +378,5 @@
 \itemsep5\p@  \@plus2.5\p@ \@minus\p@
 
 \renewcommand\smallskip{\vskip\smallskipamount}
+\renewcommand\bigskip{\vskip\bigskipamount}
+\renewcommand\medskip{\vskip\medskipamount}
