@@ -399,7 +399,7 @@
 
 \pic@height=\textheight
 \divide\pic@height\height@portion
-\fboxrule1.5pt
+\fboxrule1pt
 \fcolorbox{materialShadow}{materialWhite}{
 \makebox[\pic@width]{%
     \rule[\pic@height]{0\p@}{1.0\p@}
@@ -489,7 +489,7 @@
 \vbox{\box\pd@title\null\smallskip}
 \null
 \hbox{\raisebox{4cm}{\box5}\hfil\box6}\null\vskip 1ex
-{\color{materialShadow}\hrule height1.5\p@}
+{\color{materialShadow}\hrule height1\p@}
 \nobreak\null\smallskip
 \endgroup
 }
@@ -531,7 +531,7 @@
   \begin{list}
     {{\color{\@colorevent}\scriptsize\bfseries [\arabic{target}]}}{\usecounter{target}%
       \setlength{\rightmargin}{\leftmargin}}}{\end{list}%
-{\color{materialShadow}\hrule height1.5\p@}\null\smallskip}
+{\color{materialShadow}\hrule height1\p@}\null\smallskip}
 
 \newlength\raise@pt
 \newcommand\eventbody[2][\@empty]{%
@@ -539,29 +539,30 @@
   \setbox1=\vbox{%
     \hsize0.4\textwidth
      \hfill {\color{\@coloreventitledate}\bfseries#1}}
-   \setbox2\vbox\bgroup\hsize0.6\textwidth%
-   \noindent{\color{\@coloreventitledate}\bfseries #2}\\ } 
+   \setbox2\vbox{\hsize0.6\textwidth%
+   \noindent{\color{\@coloreventitledate}\bfseries #2}}
+   \setlength\raise@pt{\ht2}\addtolength\raise@pt{-0.7em}
+   \setbox3\hbox{\box2\raisebox{\raise@pt}{\box1}}
+   \box3\setbox4\vbox\bgroup\hsize0.6\textwidth\flushleft } 
 
 \newlength\eventskip
 \setlength\eventskip{\itemsep}
-\addtolength\eventskip{\medskipamount}
+\addtolength\eventskip{\smallskipamount}
 
 \newcommand\eventdone{%
-  \egroup
-  \setlength\raise@pt{\ht2}\addtolength\raise@pt{-0.7em}
-  \setbox3\hbox{\box2\raisebox{\raise@pt}{\box1}}
-  \box3\endgroup
-  \vskip\eventskip}
+  \vskip\eventskip\egroup
+  \unvbox4\endgroup}
 
 \newenvironment{eventfree}[1]{%
   \null
+  \raggedbottom
   \begingroup
   \setbox0=\hbox to \textwidth{\hbox{{\@eventfontitle\color{materialBlue}\bfseries #1}}\hfil}
   \vbox{\box0\null}
   \endgroup
   \newbox\event@free
   \setbox\event@free\vbox\bgroup
- }{\egroup\unvbox\event@free\unskip\null{\color{materialShadow}\hrule height1.5\p@}\null\smallskip}
+ }{\egroup\unvbox\event@free\unskip\null{\color{materialShadow}\hrule height1\p@}\null\smallskip}
 
 \RequirePackage[pdfpagelabels=false]{hyperref}
 \pagestyle{plain}
